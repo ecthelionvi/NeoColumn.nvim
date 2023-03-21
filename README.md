@@ -17,8 +17,8 @@ NeoColumn.nvim
   </a>
   <a href="https://github.com/ecthelionvi/NeoColumn/contributors">
     <img
-      alt="Contributors"
-      src="https://img.shields.io/github/contributors/ecthelionvi/NeoColumn?style=for-the-badge&logo=opensourceinitiative&color=abe9b3&logoColor=d9e0ee&labelColor=282a36"
+      alt="Repo Size"
+      src="https://img.shields.io/github/repo-size/ecthelionvi/NeoColumn?style=for-the-badge&logo=opensourceinitiative&color=abe9b3&logoColor=d9e0ee&labelColor=282a36"
     />
   </a>
 </p>
