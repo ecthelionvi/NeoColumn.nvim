@@ -35,8 +35,8 @@ This approach improves readability and helps adhere to coding standards or prefe
 ## ⚙️ Features
 
 - NeoColumn is hidden by default and appears when a line in the scope exceeds the NeoColumn value you set.
-- Hide NeoColumn for specific file types.
 - Set custom NeoColumn value for different file types.
+- Hide NeoColumn for specific file types.
 - Toggle NeoColumn on and off.
 
 ## 🔄 Persistence
