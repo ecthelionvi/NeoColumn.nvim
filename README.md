@@ -27,10 +27,7 @@ NeoColumn.nvim
 
 ## 📃 Introduction
 
-A Neovim plugin that displays a focused ColorColumn at a specific character position to help users maintain a certain line length. 
-Unlike the standard ColorColumn, this plugin highlights individual characters at the specified column, 
-reducing visual clutter and making it easier to identify longer lines. 
-This approach improves readability and helps adhere to coding standards or preferred line lengths.
+A Neovim plugin shows a focused ColorColumn at a set position for line length control. It highlights single characters for less clutter, enhancing readability and supporting coding standards or desired line lengths.
 
 ## ⚙️ Features
 
