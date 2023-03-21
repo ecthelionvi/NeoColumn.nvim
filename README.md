@@ -45,7 +45,7 @@ NeoColumn saves the state of the buffer and ColorColumn automatically. When you 
 
 ## 🎛️ Usage
 
-To toggle NeoColumn on and off, you can use the `ToggleNeoColumn` user command:
+To toggle NeoColumn on and off, you can use the `ToggleNeoColumn` command:
 
 ```vim
 :ToggleNeoColumn
@@ -55,7 +55,7 @@ This command will turn NeoColumn on if it's currently off, and vice versa.
 You can also create a keybinding to toggle NeoColumn more conveniently:
 
 ```lua
-vim.keymap.set("n", "<leader>h", "<cmd>ToggleNeoColumn", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>h", "<cmd>ToggleNeoColumn<cr>", { noremap = true, silent = true })
 ```
 
 ## 📦 Installation
