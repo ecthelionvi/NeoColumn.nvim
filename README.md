@@ -39,6 +39,25 @@ This approach improves readability and helps adhere to coding standards or prefe
 - Set custom NeoColumn value for different file types.
 - Toggle NeoColumn on and off.
 
+## 🔄 Persistence
+
+NeoColumn saves the state of the buffer and ColorColumn automatically. When you open or close buffers, the plugin will remember the ColorColumn settings, including its visibility and position, for each buffer.
+
+## 🎛️ Usage
+
+To toggle NeoColumn on and off, you can use the `ToggleNeoColumn` user command:
+
+```vim
+:ToggleNeoColumn
+```
+This command will turn NeoColumn on if it's currently off, and vice versa.
+
+You can also create a keybinding to toggle NeoColumn more conveniently:
+
+```lua
+vim.keymap.set("n", "<leader>h", "<cmd>ToggleNeoColumn", { noremap = true, silent = true })
+```
+
 ## 📦 Installation
 
 1. Install via your favorite package manager.
@@ -98,18 +117,4 @@ local config = {
    bg_color = '#ff9e64',
    notify = true,
 }
-```
-## 🎛️ Usage
-
-To toggle NeoColumn on and off, you can use the `ToggleNeoColumn` user command:
-
-```vim
-:ToggleNeoColumn
-```
-This command will turn NeoColumn on if it's currently off, and vice versa.
-
-You can also create a keybinding to toggle NeoColumn more conveniently:
-
-```lua
-vim.keymap.set("n", "<leader>h", "<cmd>ToggleNeoColumn", { noremap = true, silent = true })
 ```
