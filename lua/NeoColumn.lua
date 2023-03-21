@@ -81,7 +81,8 @@ function M.apply_NeoColumn()
   end
 
   cmd("silent! highlight ColorColumn guifg=" .. fg_color .. " guibg=" .. bg_color .. " | call clearmatches()")
-  if not M.excluded_bufs() and enabled_bufs[fn.bufnr('%')] then fn.matchadd("ColorColumn", "\\%" .. NeoColumn .. "v", 100) end
+  if not M.excluded_bufs() and enabled_bufs[fn.bufnr('%')] then fn.matchadd("ColorColumn", ".\\%" .. NeoColumn .. "v", 100) end
 end
 
 return M
+
