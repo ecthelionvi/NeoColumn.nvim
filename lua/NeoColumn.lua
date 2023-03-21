@@ -38,7 +38,7 @@ M.setup = function(user_settings)
   user_cmd("ToggleNeoColumn", "lua require('NeoColumn').toggle_NeoColumn()", {})
 
   -- Apply-NeoColumn
-  autocmd({ "BufWinEnter" }, {
+  autocmd({ "BufEnter", "BufWinEnter" }, {
     group = augroup("apply-NeoColumn", { clear = true }),
     callback = function()
       vim.schedule(function()
