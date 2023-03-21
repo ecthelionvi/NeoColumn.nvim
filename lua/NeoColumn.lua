@@ -10,7 +10,6 @@
 |__/  \__/ \_______/ \______/  \______/  \______/ |__/ \______/ |__/ |__/ |__/|__/  |__/
 
 --]]
-                                                                       ---------  
 local M = {}
 local fn = vim.fn
 local cmd = vim.cmd
@@ -23,7 +22,7 @@ local user_cmd = vim.api.nvim_create_user_command
 M.config = {
   notify = true,
   excluded_ft = {},
-  NeoColumn = '81',
+  NeoColumn = '80',
   custom_NeoColumn = {},
   fg_color = '#1a1b26',
   bg_color = '#ff9e64',
@@ -82,8 +81,10 @@ function M.apply_NeoColumn()
   end
 
   cmd("silent! highlight ColorColumn guifg=" .. fg_color .. " guibg=" .. bg_color .. " | call clearmatches()")
-  if not M.excluded_bufs() and enabled_bufs[fn.bufnr('%')] then fn.matchadd("ColorColumn", "\\%" .. NeoColumn .. "v.", 100) end
+  if not M.excluded_bufs() and enabled_bufs[fn.bufnr('%')] then
+    fn.matchadd("ColorColumn", "\\%" .. NeoColumn .. "v.",
+      100)
+  end
 end
 
 return M
-
