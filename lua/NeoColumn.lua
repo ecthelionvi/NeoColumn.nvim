@@ -13,10 +13,20 @@
 local M = {}
 local fn = vim.fn
 local cmd = vim.cmd
-local enabled_bufs = vim.g.neo_column_enabled_bufs or {}
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 local user_cmd = vim.api.nvim_create_user_command
+
+local function load_enabled_bufs()
+  local qflist = vim.fn.getqflist({title = 1})
+  if qflist.title == "NeoColumnEnabledBufs" then
+    return vim.fn.getqflist({items = 1}).items
+  else
+    return {}
+  end
+end
+
+local enabled_bufs = load_enabled_bufs()
 
 M.config = {
   notify = true,
@@ -33,14 +43,11 @@ M.setup = function(user_settings)
     M.config[k] = v
   end
 
-  -- Store the enabled buffers in a global variable
-  vim.g.neo_column_enabled_bufs = enabled_bufs
-
   -- Toggle-NeoColumn
   user_cmd("ToggleNeoColumn", "lua require('NeoColumn').toggle_NeoColumn()", {})
 
   -- Clear-NeoColumnList
-  user_cmd("ClearNeoColumn", "lua require('NeoColumn').clear_enabled_list()", {})
+  user_cmd("ClearNeoColumnList", "lua require('NeoColumn').clear_enabled_list()", {})
 
   -- Apply-NeoColumn
   autocmd({ "BufEnter", "BufWinEnter" }, {
@@ -58,6 +65,7 @@ function M.toggle_NeoColumn()
   if M.excluded_bufs() then return end
   local file_path = fn.expand('%:p')
   enabled_bufs[file_path] = not enabled_bufs[file_path]
+  M.save_enabled_bufs()
   if M.config.notify then
     M.notify_NeoColumn()
   end
@@ -66,8 +74,8 @@ end
 
 -- Clear-Enabled-List
 function M.clear_enabled_list()
+  vim.fn.setqflist({}, 'r', {title = 'NeoColumnEnabledBufs'})
   enabled_bufs = {}
-  vim.g.neo_column_enabled_bufs = enabled_bufs
   if M.config.notify then
     vim.notify("NeoColumn enabled list cleared")
   end
@@ -84,6 +92,7 @@ function M.notify_NeoColumn()
   vim.notify("NeoColumn " .. (enabled_bufs[fn.expand('%:p')] and "Enabled" or "Disabled"))
 end
 
+-- Apply-NeoColumn
 function M.apply_NeoColumn()
   local NeoColumn = M.config.NeoColumn
   local fg_color = M.config.fg_color
@@ -101,5 +110,15 @@ function M.apply_NeoColumn()
   end
 end
 
-return M
+-- Save-Enabled-Bufs
+function M.save_enabled_bufs()
+  local items = {}
+  for k, v in pairs(enabled_bufs) do
+    if v then
+      table.insert(items, {filename = k})
+    end
+  end
+  vim.fn.setqflist(items, 'r', {title = 'NeoColumnEnabledBufs'})
+end
 
+return M
