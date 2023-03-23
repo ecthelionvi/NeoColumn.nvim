@@ -18,9 +18,14 @@ local augroup = vim.api.nvim_create_augroup
 local user_cmd = vim.api.nvim_create_user_command
 
 local function load_enabled_bufs()
-  local qflist = vim.fn.getqflist({title = 1})
-  if qflist.title == "NeoColumnEnabledBufs" then
-    return vim.fn.getqflist({items = 1}).items
+  local qflist_title = vim.fn.getqflist({ title = 1 }).title
+  if qflist_title == "NeoColumnEnabledBufs" then
+    local qflist_items = vim.fn.getqflist({ items = 1 }).items
+    local enabled = {}
+    for _, item in ipairs(qflist_items) do
+      enabled[item.filename] = true
+    end
+    return enabled
   else
     return {}
   end
@@ -74,7 +79,7 @@ end
 
 -- Clear-Enabled-List
 function M.clear_enabled_list()
-  vim.fn.setqflist({}, 'r', {title = 'NeoColumnEnabledBufs'})
+  vim.fn.setqflist({}, 'r', { title = 'NeoColumnEnabledBufs' })
   enabled_bufs = {}
   if M.config.notify then
     vim.notify("NeoColumn enabled list cleared")
@@ -115,10 +120,11 @@ function M.save_enabled_bufs()
   local items = {}
   for k, v in pairs(enabled_bufs) do
     if v then
-      table.insert(items, {filename = k})
+      table.insert(items, { filename = k })
     end
   end
-  vim.fn.setqflist(items, 'r', {title = 'NeoColumnEnabledBufs'})
+  vim.fn.setqflist(items, 'r', { title = 'NeoColumnEnabledBufs' })
 end
 
 return M
+
