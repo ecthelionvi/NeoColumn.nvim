@@ -84,9 +84,22 @@ function M.notify_NeoColumn()
   vim.notify("NeoColumn " .. (enabled_bufs[fn.expand('%:p')] and "Enabled" or "Disabled"))
 end
 
--- Apply-NeoColumn
 function M.apply_NeoColumn()
   local NeoColumn = M.config.NeoColumn
-  local fg
+  local fg_color = M.config.fg_color
+  local bg_color = M.config.bg_color
+  local current_ft = vim.bo.filetype
+  local file_path = fn.expand('%:p')
+
+  if M.config.custom_NeoColumn[current_ft] then
+    NeoColumn = M.config.custom_NeoColumn[current_ft]
+  end
+
+  cmd("silent! highlight ColorColumn guifg=" .. fg_color .. " guibg=" .. bg_color .. " | call clearmatches()")
+  if not M.excluded_bufs() and enabled_bufs[file_path] then
+    fn.matchadd("ColorColumn", "\\%" .. NeoColumn .. "v.", 100)
+  end
+end
 
 return M
+
