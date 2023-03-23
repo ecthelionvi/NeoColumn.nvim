@@ -27,12 +27,12 @@ local config = {
   bg_color = '#ff9e64',
 }
 
-local ENABLED_BUFS_FILE = vim.fn.stdpath('config') .. "/neocolumn_enabled_bufs.json"
+local ENABLED_BUFS_FILE = vim.fn.stdpath('cache') .. "/neocolumn_enabled_bufs.json"
 
 local function create_config_dir()
-  local config_dir = vim.fn.stdpath('config')
-  if vim.fn.isdirectory(config_dir) == 0 then
-    vim.fn.mkdir(config_dir, 'p')
+  local cache_dir = vim.fn.stdpath('cache')
+  if vim.fn.isdirectory(cache_dir) == 0 then
+    vim.fn.mkdir(cache_dir, 'p')
   end
 end
 
