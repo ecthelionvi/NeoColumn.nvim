@@ -27,7 +27,7 @@ local config = {
   bg_color = '#ff9e64',
 }
 
-local ENABLED_BUFS_FILE = vim.fn.stdpath('config') .. "/neocolumn_enabled_bufs.json"
+local ENABLED_BUFS_FILE = vim.fn.stdpath('.config') .. "/neocolumn_enabled_bufs.json"
 
 local function load_enabled_bufs()
   if vim.fn.filereadable(ENABLED_BUFS_FILE) == 1 then
