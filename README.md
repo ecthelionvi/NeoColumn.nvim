@@ -23,7 +23,7 @@ NeoColumn.nvim
   </a>
 </p>
 
-![demo](https://raw.githubusercontent.com/ecthelionvi/images/main/NeoColumn.gif)
+![demo](https://raw.githubusercontent.com/ecthelionvi/Images/main/NeoColumn.gif)
 
 ## 📃 Introduction
 
