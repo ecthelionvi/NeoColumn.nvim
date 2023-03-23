@@ -27,7 +27,14 @@ local config = {
   bg_color = '#ff9e64',
 }
 
-local ENABLED_BUFS_FILE = vim.fn.stdpath('.config') .. "/neocolumn_enabled_bufs.json"
+local ENABLED_BUFS_FILE = vim.fn.stdpath('config') .. "/neocolumn_enabled_bufs.json"
+
+local function create_config_dir()
+  local config_dir = vim.fn.stdpath('config')
+  if vim.fn.isdirectory(config_dir) == 0 then
+    vim.fn.mkdir(config_dir, 'p')
+  end
+end
 
 local function load_enabled_bufs()
   if vim.fn.filereadable(ENABLED_BUFS_FILE) == 1 then
@@ -111,6 +118,7 @@ end
 
 -- Save-Enabled_Bufs
 function NeoColumn.save_enabled_bufs()
+  create_config_dir()
   local items = {}
   for k, v in pairs(enabled_bufs) do
     if v then
@@ -128,4 +136,3 @@ function NeoColumn.clear_enabled_list()
 end
 
 return NeoColumn
-
