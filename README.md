@@ -9,7 +9,7 @@
       src="https://img.shields.io/github/stars/ecthelionvi/NeoColumn?style=for-the-badge&logo=starship&color=fae3b0&logoColor=d9e0ee&labelColor=282a36"
     />
   </a>
-  <a href="https://github.com/ecthelionvi/NeoColumn/contributors">
+  <a href="https://github.com/ecthelionvi/NeoColumn">
     <img
       alt="Size"
       src="https://img.shields.io/github/repo-size/ecthelionvi/NeoColumn?style=for-the-badge&logo=opensourceinitiative&color=abe9b3&logoColor=d9e0ee&labelColor=282a36"
