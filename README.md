@@ -25,11 +25,11 @@ NeoColumn.nvim
 
 ![demo](https://raw.githubusercontent.com/ecthelionvi/Images/main/NeoColumn.gif)
 
-## 📃 Introduction
+## 📋 Introduction
 
 NeoColumn is a Neovim plugin that shows a focused ColorColumn at a specific position to manage line length. It highlights individual characters, minimizing clutter and enhancing readability
 
-## ⚙️ Features
+## ⚙️  Features
 
 - Displays a focused ColorColumn at the desired position
 - Set custom NeoColumn values for different file types
