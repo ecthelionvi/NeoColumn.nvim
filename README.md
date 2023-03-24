@@ -3,16 +3,16 @@
 </h1>
 
 <p align="center">
-  <a href="https://github.com/ecthelionvi/NeoColumn/stargazers">
+  <a href="http://www.lua.org">
     <img
-      alt="Stargazers"
-      src="https://img.shields.io/github/stars/ecthelionvi/NeoColumn?style=for-the-badge&logo=starship&color=fae3b0&logoColor=d9e0ee&labelColor=282a36"
+      alt="Lua"
+      src="https://img.shields.io/badge/Lua-blue.svg?style=for-the-badge&logo=lua"
     />
   </a>
-  <a href="https://github.com/ecthelionvi/NeoColumn">
+  <a href="https://neovim.io/">
     <img
-      alt="Size"
-      src="https://img.shields.io/github/repo-size/ecthelionvi/NeoColumn?style=for-the-badge&logo=opensourceinitiative&color=abe9b3&logoColor=d9e0ee&labelColor=282a36"
+      alt="Neovim"
+      src="https://img.shields.io/badge/NeoVim-%2357A143.svg?&style=for-the-badge&logo=neovim&logoColor=white"
     />
   </a>
 </p>
