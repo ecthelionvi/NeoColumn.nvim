@@ -27,7 +27,23 @@ local config = {
 
 local ENABLED_BUFS_FILE = vim.fn.stdpath('cache') .. "/neocolumn_enabled_bufs.json"
 
-local enabled_bufs = {}
+local function load_enabled_bufs()
+  if vim.fn.filereadable(ENABLED_BUFS_FILE) == 1 then
+    local file_content = table.concat(vim.fn.readfile(ENABLED_BUFS_FILE))
+    local decoded_data = vim.fn.json_decode(file_content)
+    local enabled = {}
+    if decoded_data ~= nil then
+      for _, filename in ipairs(decoded_data) do
+        enabled[filename] = true
+      end
+    end
+    return enabled
+  else
+    return {}
+  end
+end
+
+local enabled_bufs = load_enabled_bufs()
 
 NeoColumn.setup = function(user_settings)
   -- Merge user settings with default settings
