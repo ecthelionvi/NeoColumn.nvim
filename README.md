@@ -27,14 +27,13 @@ NeoColumn.nvim
 
 ## 📃 Introduction
 
-A Neovim plugin shows a focused ColorColumn at a set position for line length control. It highlights single characters for less clutter, enhancing readability and supporting coding standards or desired line lengths.
+NeoColumn is a Neovim plugin that shows a focused ColorColumn at a specific position to manage line length. It highlights individual characters, minimizing clutter and enhancing readability
 
 ## ⚙️ Features
 
-- NeoColumn is hidden by default and appears when a line in the scope exceeds the NeoColumn value you set.
-- Set custom NeoColumn value for different file types.
-- Hide NeoColumn for specific file types.
-- Toggle NeoColumn on and off.
+- Displays a focused ColorColumn at the desired position
+- Set custom NeoColumn values for different file types
+- Toggle NeoColumn on and off
 
 ## 🔄 Persistence
 
@@ -72,11 +71,6 @@ vim.keymap.set("n", "<leader>h", "<cmd>ToggleNeoColumn<cr>", { noremap = true, s
 use "ecthelionvi/NeoColumn.nvim"
 ```
 
-- [vim-plug](https://github.com/junegunn/vim-plug)
-```VimL
-Plug "ecthelionvi/NeoColumn.nvim"
-```
-
 2. Setup the plugin in your `init.lua`. This step is not needed with lazy.nvim if `opts` is set as above.
 ```Lua
 require("NeoColumn").setup()
@@ -90,28 +84,21 @@ The available options:
 
 - `NeoColumn` (string) : the character position at which the ColorColumn appears
   - `"80"` (default)
-- `excluded_ft` (table of strings) : the ColorColumn will be disabled for the file types in this table
-  - `{}` (default)
-  - Example:`{ "help", "text", "markdown" }`
-- `custom_NeoColumn` (table): custom NeoColumn values for different file types
-  - `{}` (default)
   - Example: `{ ruby = "120", java = "180" }`
 - `fg_color`(string) : the foreground color of the ColorColumn
   - `'#1a1b26'` (default)
 - `bg_color`(string) : the background color of the ColorColumn
   - `'#ff9e64'` (default)
-- `notify` (boolean) : whether to show a notification when toggling the ColorColumn
-  - `true` (default)
+- `custom_NeoColumn` (table): custom NeoColumn values for different file types
+  - `{}` (default)
 
 ### Default config
 
 ```Lua
 local config = {
    NeoColumn = "80",
-   excluded_ft = {},
-   custom_NeoColumn = {},
    fg_color = '#1a1b26',
    bg_color = '#ff9e64',
-   notify = true,
+   custom_NeoColumn = {},
 }
 ```
