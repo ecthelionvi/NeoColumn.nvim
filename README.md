@@ -1,5 +1,5 @@
 <h1 align="center">
-📊 NeoColumn.nvim
+🌈 NeoColumn.nvim
 </h1>
 
 <p align="center">
