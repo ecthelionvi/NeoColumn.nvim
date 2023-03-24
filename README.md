@@ -46,7 +46,7 @@ You can also create a keybinding to toggle NeoColumn more conveniently:
 vim.keymap.set("n", "<leader>h", "<cmd>ToggleNeoColumn<cr>", { noremap = true, silent = true })
 ```
 
-You can clear the list of enabled files in NeoColumn using the ClearNeoColumn command.
+You can clear the list of enabled files in NeoColumn using the ClearNeoColumn command:
 
 ```vim
 :ClearNeoColumn
