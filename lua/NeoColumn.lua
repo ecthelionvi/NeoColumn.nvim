@@ -41,8 +41,10 @@ local function load_enabled_bufs()
     local file_content = table.concat(vim.fn.readfile(ENABLED_BUFS_FILE))
     local decoded_data = vim.fn.json_decode(file_content)
     local enabled = {}
-    for _, filename in ipairs(decoded_data) do
-      enabled[filename] = true
+    if decoded_data ~= nil then
+      for _, filename in ipairs(decoded_data) do
+        enabled[filename] = true
+      end
     end
     return enabled
   else
