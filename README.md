@@ -82,13 +82,13 @@ The available options:
 
 - `NeoColumn` (string) : the character position at which the ColorColumn appears
   - `"80"` (default)
-  - Example: `{ ruby = "120", java = "180" }`
 - `fg_color`(string) : the foreground color of the ColorColumn
   - `'#1a1b26'` (default)
 - `bg_color`(string) : the background color of the ColorColumn
   - `'#ff9e64'` (default)
 - `custom_NeoColumn` (table): custom NeoColumn values for different file types
   - `{}` (default)
+  - Example: `{ ruby = "120", java = "180" }`
 
 ### Default config
 
