@@ -88,7 +88,7 @@ The available options:
   - `'#ff9e64'` (default)
 - `custom_NeoColumn` (table): custom NeoColumn values for different file types
   - `{}` (default)
-  - Example: `{ ruby = "120", java = "180" }`
+  - `{ ruby = "120", java = "180" }`
 
 ### Default config
 
