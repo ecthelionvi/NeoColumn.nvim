@@ -132,6 +132,7 @@ end
 -- Clear-List
 function NeoColumn.clear_enabled_list()
   enabled_bufs = {}
+  vim.fn.clearmatches()
   NeoColumn.save_enabled_bufs()
 end
 
