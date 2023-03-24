@@ -19,40 +19,15 @@ local augroup = vim.api.nvim_create_augroup
 local user_cmd = vim.api.nvim_create_user_command
 
 local config = {
-  notify = true,
-  excluded_ft = {},
   NeoColumn = '80',
-  custom_NeoColumn = {},
   fg_color = '#1a1b26',
   bg_color = '#ff9e64',
+  custom_NeoColumn = {},
 }
 
 local ENABLED_BUFS_FILE = vim.fn.stdpath('cache') .. "/neocolumn_enabled_bufs.json"
 
-local function create_config_dir()
-  local cache_dir = vim.fn.stdpath('cache')
-  if vim.fn.isdirectory(cache_dir) == 0 then
-    vim.fn.mkdir(cache_dir, 'p')
-  end
-end
-
-local function load_enabled_bufs()
-  if vim.fn.filereadable(ENABLED_BUFS_FILE) == 1 then
-    local file_content = table.concat(vim.fn.readfile(ENABLED_BUFS_FILE))
-    local decoded_data = vim.fn.json_decode(file_content)
-    local enabled = {}
-    if decoded_data ~= nil then
-      for _, filename in ipairs(decoded_data) do
-        enabled[filename] = true
-      end
-    end
-    return enabled
-  else
-    return {}
-  end
-end
-
-local enabled_bufs = load_enabled_bufs()
+local enabled_bufs = {}
 
 NeoColumn.setup = function(user_settings)
   -- Merge user settings with default settings
@@ -79,20 +54,11 @@ end
 
 -- Toggle-NeoColumn
 function NeoColumn.toggle_NeoColumn()
-  if NeoColumn.excluded_bufs() then return end
   local file_path = fn.expand('%:p')
   enabled_bufs[file_path] = not enabled_bufs[file_path]
   NeoColumn.save_enabled_bufs()
-  if config.notify then
-    NeoColumn.notify_NeoColumn()
-  end
+  NeoColumn.notify_NeoColumn()
   NeoColumn.apply_NeoColumn()
-end
-
--- Excluded-Buf
-function NeoColumn.excluded_bufs()
-  local excluded_ft = config.excluded_ft
-  return vim.tbl_contains(excluded_ft, vim.bo.filetype) or not vim.bo.modifiable
 end
 
 -- Notify-NeoColumn
@@ -113,14 +79,18 @@ function NeoColumn.apply_NeoColumn()
   end
 
   cmd("silent! highlight ColorColumn guifg=" .. fg_color .. " guibg=" .. bg_color .. " | call clearmatches()")
-  if not NeoColumn.excluded_bufs() and enabled_bufs[file_path] then
+  if enabled_bufs[file_path] then
     fn.matchadd("ColorColumn", "\\%" .. NeoColumn_value .. "v.", 100)
   end
 end
 
 -- Save-Enabled_Bufs
 function NeoColumn.save_enabled_bufs()
-  create_config_dir()
+  local cache_dir = vim.fn.stdpath('cache')
+  if vim.fn.isdirectory(cache_dir) == 0 then
+    vim.fn.mkdir(cache_dir, 'p')
+  end
+
   local items = {}
   for k, v in pairs(enabled_bufs) do
     if v then
