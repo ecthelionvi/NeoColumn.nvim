@@ -46,8 +46,6 @@ To toggle NeoColumn on and off, you can use the `ToggleNeoColumn` command:
 ```vim
 :ToggleNeoColumn
 ```
-This command will turn NeoColumn on if it's currently off, and vice versa.
-
 You can also create a keybinding to toggle NeoColumn more conveniently:
 
 ```lua
