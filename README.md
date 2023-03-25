@@ -31,7 +31,7 @@ NeoColumn is a Neovim plugin that shows a focused ColorColumn at a specific posi
 
 ## 💾 Persistence
 
-NeoColumn saves the state of the buffer and ColorColumn automatically. When you open or close buffers, the plugin will remember the ColorColumn settings, including its visibility and position, for each buffer.
+NeoColumn saves the state of the file and ColorColumn automatically. When you open or close files, the plugin will remember the ColorColumn settings, including its visibility and position, for each file.
 
 ## 🛠️ Usage
 
