@@ -86,8 +86,6 @@ The available options:
   - `{}` (default)
   - `{ ruby = "120", java = "180" }`
 
-If fg_color and bg_color are not set, the ColorColumn will use the default colors of the IncSearch highlight group.
-
 ### Default config
 
 ```Lua
