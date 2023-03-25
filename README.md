@@ -83,9 +83,13 @@ The available options:
 - `NeoColumn` (string) : the character position at which the ColorColumn appears
   - `"80"` (default)
 - `fg_color`(string) : the foreground color of the ColorColumn
+
   - ![#1a1b26](https://placehold.co/15x15/1a1b26/1a1b26.png) `#1a1b26` (default)
+
 - `bg_color`(string) : the background color of the ColorColumn
+
   - ![#ff9e64](https://placehold.co/15x15/ff9e64/ff9e64.png) `#ff9e64` (default)
+
 - `custom_NeoColumn` (table): custom NeoColumn values for different file types
   - `{}` (default)
   - `{ ruby = "120", java = "180" }`
