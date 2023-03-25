@@ -83,7 +83,7 @@ The available options:
 - `NeoColumn` (string) : the character position at which the ColorColumn appears
   - `"80"` (default)
 - `custom_NeoColumn` (table): custom NeoColumn values for different file types
-  - `{}`   (default)
+  - `{}` (default)
   - `{ ruby = "120", java = "180" }`
 
 ### Default config
