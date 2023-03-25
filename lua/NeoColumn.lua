@@ -19,8 +19,6 @@ local augroup = vim.api.nvim_create_augroup
 local user_cmd = vim.api.nvim_create_user_command
 
 local config = {
-  fg_color = '',
-  bg_color = '',
   NeoColumn = '80',
   custom_NeoColumn = {},
 }
@@ -45,22 +43,11 @@ end
 
 local enabled_bufs = load_enabled_bufs()
 
-local function get_hl_group_colors(group_name)
-  local guifg = vim.fn.synIDattr(vim.fn.hlID(group_name), "fg#")
-  local guibg = vim.fn.synIDattr(vim.fn.hlID(group_name), "bg#")
-  return guifg, guibg
-end
-
 NeoColumn.setup = function(user_settings)
   -- Merge user settings with default settings
   for k, v in pairs(user_settings) do
     config[k] = v
   end
-
-  -- Get default colors from IncSearch
-  local default_fg, default_bg = get_hl_group_colors("IncSearch")
-  config.fg_color = default_fg or config.fg_color
-  config.bg_color = default_bg or config.bg_color
 
   -- Toggle-NeoColumn
   user_cmd("ToggleNeoColumn", "lua require('NeoColumn').toggle_NeoColumn()", {})
@@ -100,11 +87,11 @@ end
 
 -- Apply-NeoColumn
 function NeoColumn.apply_NeoColumn()
-  local NeoColumn_value = config.NeoColumn
-  local fg_color = config.fg_color
-  local bg_color = config.bg_color
-  local current_ft = vim.bo.filetype
   local file_path = fn.expand('%:p')
+  local current_ft = vim.bo.filetype
+  local NeoColumn_value = config.NeoColumn
+  local fg_color = vim.fn.synIDattr(vim.fn.hlID("IncSearch"), "fg#")
+  local bg_color = vim.fn.synIDattr(vim.fn.hlID("IncSearch"), "bg#")
 
   if config.custom_NeoColumn[current_ft] then
     NeoColumn_value = config.custom_NeoColumn[current_ft]
