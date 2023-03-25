@@ -14,6 +14,7 @@ local NeoColumn = {}
 
 local fn = vim.fn
 local cmd = vim.cmd
+local api = vim.api
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 local user_cmd = vim.api.nvim_create_user_command
