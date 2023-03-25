@@ -86,7 +86,7 @@ The available options:
   - `{}` (default)
   - `{ ruby = "120", java = "180" }`
 
-### Default config
+### Default Config
 
 ```Lua
 local config = {
