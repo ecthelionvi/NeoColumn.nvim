@@ -82,20 +82,16 @@ The available options:
 
 - `NeoColumn` (string) : the character position at which the ColorColumn appears
   - `"80"` (default)
-- `fg_color`(string) : the foreground color of the ColorColumn
-  - `""` (default)
-- `bg_color`(string) : the background color of the ColorColumn
-  - `""` (default)
 - `custom_NeoColumn` (table): custom NeoColumn values for different file types
   - `{}` (default)
   - `{ ruby = "120", java = "180" }`
+
+If fg_color and bg_color are not set, the ColorColumn will use the default colors of the IncSearch highlight group.
 
 ### Default config
 
 ```Lua
 local config = {
-  fg_color = "",
-  bg_color = "",
   NeoColumn = "80",
   custom_NeoColumn = {},
 }
