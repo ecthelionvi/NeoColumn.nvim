@@ -20,7 +20,6 @@ local user_cmd = vim.api.nvim_create_user_command
 
 local config = {
   NeoColumn = '80',
-  custom_NeoColumn = {},
 }
 
 local ENABLED_BUFS_FILE = vim.fn.stdpath('cache') .. "/neocolumn_enabled_bufs.json"
@@ -88,14 +87,9 @@ end
 -- Apply-NeoColumn
 function NeoColumn.apply_NeoColumn()
   local file_path = fn.expand('%:p')
-  local current_ft = vim.bo.filetype
   local NeoColumn_value = config.NeoColumn
   local fg_color = vim.fn.synIDattr(vim.fn.hlID("IncSearch"), "fg#")
   local bg_color = vim.fn.synIDattr(vim.fn.hlID("IncSearch"), "bg#")
-
-  if config.custom_NeoColumn[current_ft] then
-    NeoColumn_value = config.custom_NeoColumn[current_ft]
-  end
 
   cmd("silent! highlight ColorColumn guifg=" .. fg_color .. " guibg=" .. bg_color .. " | call clearmatches()")
   if enabled_bufs[file_path] then
