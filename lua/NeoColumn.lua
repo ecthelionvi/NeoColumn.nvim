@@ -91,8 +91,8 @@ end
 function NeoColumn.apply_NeoColumn()
   local file_path = fn.expand('%:p')
   local NeoColumn_value = config.NeoColumn
-  local fg_color = config.fg_color or vim.fn.synIDattr(vim.fn.hlID("IncSearch"), "fg#")
-  local bg_color = config.bg_color or vim.fn.synIDattr(vim.fn.hlID("IncSearch"), "bg#")
+  local fg_color = (config.fg_color ~= '' and config.fg_color) or vim.fn.synIDattr(vim.fn.hlID("IncSearch"), "fg#")
+  local bg_color = (config.bg_color ~= '' and config.bg_color) or vim.fn.synIDattr(vim.fn.hlID("IncSearch"), "bg#")
 
   cmd("silent! highlight ColorColumn guifg=" .. fg_color .. " guibg=" .. bg_color .. " | call clearmatches()")
   if enabled_bufs[file_path] then
