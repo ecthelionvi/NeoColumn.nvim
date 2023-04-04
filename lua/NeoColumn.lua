@@ -99,6 +99,7 @@ end
 function NeoColumn.apply_NeoColumn()
   local bt = vim.bo.buftype
   local ft = vim.bo.filetype
+  local disabled = { "terminal", "nofile" }
   local file_path = fn.expand('%:p')
   local NeoColumn_value = config.NeoColumn
   local fg_color = (config.fg_color ~= '' and config.fg_color) or fn.synIDattr(fn.hlID("IncSearch"), "fg#")
@@ -106,7 +107,7 @@ function NeoColumn.apply_NeoColumn()
 
   cmd("silent! highlight ColorColumn guifg=" .. fg_color .. " guibg=" .. bg_color .. " | call clearmatches()")
 
-  if bt == "terminal" or bt == "nofile" then return end
+  if vim.tbl_contains(disabled, bt) then return end
 
   if not vim.tbl_contains(config.excluded_ft, ft) then
     if (config.always_on and not neocolumn_bufs[file_path]) or (not config.always_on and neocolumn_bufs[file_path]) then
