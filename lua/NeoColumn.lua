@@ -95,13 +95,14 @@ end
 
 -- Apply-NeoColumn
 function NeoColumn.apply_NeoColumn()
+  local bt = vim.bo.buftype
   local ft = vim.bo.filetype
   local file_path = fn.expand('%:p')
   local NeoColumn_value = config.NeoColumn
   local fg_color = (config.fg_color ~= '' and config.fg_color) or fn.synIDattr(fn.hlID("IncSearch"), "fg#")
   local bg_color = (config.bg_color ~= '' and config.bg_color) or fn.synIDattr(fn.hlID("IncSearch"), "bg#")
 
-  if vim.bo.buftype == "terminal" or not vim.bo.modifiable then return end
+  if bt == "terminal" or bt == "nofile" then return end
 
   cmd("silent! highlight ColorColumn guifg=" .. fg_color .. " guibg=" .. bg_color)
 
