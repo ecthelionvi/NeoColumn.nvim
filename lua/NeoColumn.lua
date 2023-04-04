@@ -98,7 +98,7 @@ function NeoColumn.apply_NeoColumn()
   local ft = vim.bo.filetype
   local file_path = fn.expand('%:p')
   local NeoColumn_value = config.NeoColumn
-  local match_id = api.nvim_buf_get_var(0, "NeoColumn_match_id")
+  local match_id = pcall(api.nvim_buf_get_var(0, "NeoColumn_match_id"))
   local fg_color = (config.fg_color ~= '' and config.fg_color) or fn.synIDattr(fn.hlID("IncSearch"), "fg#")
   local bg_color = (config.bg_color ~= '' and config.bg_color) or fn.synIDattr(fn.hlID("IncSearch"), "bg#")
 
