@@ -26,6 +26,8 @@ NeoColumn is a Neovim plugin that shows a focused ColorColumn at a specific posi
 ## ✨ Features
 
 - Displays a focused ColorColumn at the desired position
+- Customizable hex code foreground and background colors 
+- Excludes specified filetypes from the ColorColumn 
 - Toggle NeoColumn on and off
 
 ## 💾 Persistence
@@ -79,19 +81,27 @@ You can pass your config table into the `setup()` function or `opts` if you use 
 
 The available options:
 
-- `NeoColumn` (string) : the character position at which the ColorColumn appears
-  - `"80"` (default)
 - `fg_color`(string) : the foreground color of the ColorColumn as a hex code (e.g., `"#FF0000"`)  
   - `""` (default, falls back to the foreground color of the `IncSearch` highlight group)
 - `bg_color`(string) : the background color of the ColorColumn as a hex code (e.g., `"#00FF00"`)
   - `""` (default, falls back to the background color of the `IncSearch` highlight group)
+- `NeoColumn` (string) : the character position at which the ColorColumn appears
+  - `"80"` (default)
+- `excluded_ft` (table) :  a list of filetypes to exclude from the ColorColumn  
+  - `{}` (default)
+- `always_on` (boolean) : whether to always turn on the ColorColumn by default  
+  - `false` (default)
+
+When `always_on` is `true`, the ColorColumn is enabled by default in all buffers, but can still be toggled off/on with the `ToggleNeoColumn` command or keybinding.
 
 ### Default Config
 
 ```Lua
 local config = {
-  fg_color = "",
-  bg_color = "",
-  NeoColumn = "80",
+  fg_color = '',
+  bg_color = '',
+  NeoColumn = '80',
+  excluded_ft = {},
+  always_on = false,
 }
 ```
