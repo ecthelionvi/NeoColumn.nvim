@@ -102,9 +102,9 @@ function NeoColumn.apply_NeoColumn()
   local fg_color = (config.fg_color ~= '' and config.fg_color) or fn.synIDattr(fn.hlID("IncSearch"), "fg#")
   local bg_color = (config.bg_color ~= '' and config.bg_color) or fn.synIDattr(fn.hlID("IncSearch"), "bg#")
 
-  if bt == "terminal" or bt == "nofile" then return end
-
   cmd("silent! highlight ColorColumn guifg=" .. fg_color .. " guibg=" .. bg_color .. " | call clearmatches()")
+
+  if bt == "terminal" or bt == "nofile" then return end
 
   if not vim.tbl_contains(config.excluded_ft, ft) then
     if (config.always_on and not neocolumn_bufs[file_path]) or (not config.always_on and neocolumn_bufs[file_path]) then
