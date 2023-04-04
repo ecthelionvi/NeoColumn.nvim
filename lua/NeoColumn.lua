@@ -73,8 +73,10 @@ end
 -- Toggle-NeoColumn
 function NeoColumn.toggle_NeoColumn()
   local ft = vim.bo.filetype
+  local bt = vim.bo.buftype
+  local disabled = { "terminal", "nofile" }
   local file_path = fn.expand('%:p')
-  if vim.tbl_contains(config.excluded_ft, ft) then return end
+  if vim.tbl_contains(config.excluded_ft, ft) or vim.tbl_contains(disabled, bt) then return end
   neocolumn_bufs[file_path] = not neocolumn_bufs[file_path]
   NeoColumn.save_neocolumn_bufs()
   NeoColumn.notify_NeoColumn()
