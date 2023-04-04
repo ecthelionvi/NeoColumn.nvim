@@ -83,11 +83,7 @@ end
 
 -- Notify-NeoColumn
 function NeoColumn.notify_NeoColumn()
-  if config.always_on then
-    vim.notify("NeoColumn " .. (neocolumn_bufs[fn.expand('%:p')] and "Disabled" or "Enabled"))
-  else
-    vim.notify("NeoColumn " .. (neocolumn_bufs[fn.expand('%:p')] and "Enabled" or "Disabled"))
-  end
+  vim.notify("NeoColumn " .. ((config.always_on ~= neocolumn_bufs[fn.expand('%:p')]) and "Enabled" or "Disabled"))
 
   -- Clear the message area after 3 seconds (3000 milliseconds)
   vim.defer_fn(function()
