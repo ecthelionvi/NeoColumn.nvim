@@ -60,7 +60,7 @@ NeoColumn.setup = function(user_settings)
   user_cmd("ClearNeoColumn", "lua require('NeoColumn').clear_buf_list()", {})
 
   -- Apply-NeoColumn
-  autocmd({ "BufEnter", "BufWinEnter" }, {
+  autocmd({ "Filetype", "BufEnter", "BufWinEnter" }, {
     group = augroup("apply-NeoColumn", { clear = true }),
     callback = function()
       vim.schedule(function()
