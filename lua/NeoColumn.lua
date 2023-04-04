@@ -74,9 +74,10 @@ end
 function NeoColumn.toggle_NeoColumn()
   local ft = vim.bo.filetype
   local bt = vim.bo.buftype
-  local disabled = { "terminal", "nofile" }
   local file_path = fn.expand('%:p')
-  if vim.tbl_contains(config.excluded_ft, ft) or vim.tbl_contains(disabled, bt) then return end
+  local excluded_ft = config.excluded_ft
+  local disabled = { "terminal", "nofile" }
+  if vim.tbl_contains(excluded_ft, ft) or vim.tbl_contains(disabled, bt) then return end
   neocolumn_bufs[file_path] = not neocolumn_bufs[file_path]
   NeoColumn.save_neocolumn_bufs()
   NeoColumn.notify_NeoColumn()
@@ -85,7 +86,8 @@ end
 
 -- Notify-NeoColumn
 function NeoColumn.notify_NeoColumn()
-  vim.notify("NeoColumn " .. ((config.always_on ~= neocolumn_bufs[fn.expand('%:p')]) and "Enabled" or "Disabled"))
+  local always_on = config.always_on
+  vim.notify("NeoColumn " .. ((always_on ~= neocolumn_bufs[fn.expand('%:p')]) and "Enabled" or "Disabled"))
 
   -- Clear the message area after 3 seconds (3000 milliseconds)
   vim.defer_fn(function()
@@ -97,9 +99,11 @@ end
 function NeoColumn.apply_NeoColumn()
   local bt = vim.bo.buftype
   local ft = vim.bo.filetype
-  local disabled = { "terminal", "nofile" }
   local file_path = fn.expand('%:p')
+  local always_on = config.always_on
+  local excluded_ft = config.excluded_ft
   local NeoColumn_value = config.NeoColumn
+  local disabled = { "terminal", "nofile" }
   local fg_color = (config.fg_color ~= '' and config.fg_color) or fn.synIDattr(fn.hlID("IncSearch"), "fg#")
   local bg_color = (config.bg_color ~= '' and config.bg_color) or fn.synIDattr(fn.hlID("IncSearch"), "bg#")
 
@@ -107,8 +111,8 @@ function NeoColumn.apply_NeoColumn()
 
   if vim.tbl_contains(disabled, bt) then return end
 
-  if not vim.tbl_contains(config.excluded_ft, ft) then
-    if (config.always_on and not neocolumn_bufs[file_path]) or (not config.always_on and neocolumn_bufs[file_path]) then
+  if not vim.tbl_contains(excluded_ft, ft) then
+    if (always_on and not neocolumn_bufs[file_path]) or (not always_on and neocolumn_bufs[file_path]) then
       fn.matchadd("ColorColumn", "\\%" .. NeoColumn_value .. "v.", 100)
     end
   end
