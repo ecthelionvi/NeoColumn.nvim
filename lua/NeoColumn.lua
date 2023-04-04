@@ -104,18 +104,11 @@ function NeoColumn.apply_NeoColumn()
 
   if bt == "terminal" or bt == "nofile" then return end
 
-  cmd("silent! highlight ColorColumn guifg=" .. fg_color .. " guibg=" .. bg_color)
-
-  -- Get the match ID from the buffer variable, if it exists
-  local match_id_exists, match_id = pcall(vim.api.nvim_buf_get_var, 0, "NeoColumn_match_id")
-  if match_id_exists then
-    vim.fn.matchdelete(match_id)
-  end
+  cmd("silent! highlight ColorColumn guifg=" .. fg_color .. " guibg=" .. bg_color .. " | call clearmatches()")
 
   if not vim.tbl_contains(config.excluded_ft, ft) then
     if (config.always_on and not neocolumn_bufs[file_path]) or (not config.always_on and neocolumn_bufs[file_path]) then
-      local new_match_id = fn.matchadd("ColorColumn", "\\%" .. NeoColumn_value .. "v.", 100)
-      api.nvim_buf_set_var(0, "NeoColumn_match_id", new_match_id)
+      fn.matchadd("ColorColumn", "\\%" .. NeoColumn_value .. "v.", 100)
     end
   end
 end
