@@ -98,7 +98,6 @@ function NeoColumn.apply_NeoColumn()
   local ft = vim.bo.filetype
   local file_path = fn.expand('%:p')
   local NeoColumn_value = config.NeoColumn
-  local match_id = pcall(api.nvim_buf_get_var(0, "NeoColumn_match_id"))
   local fg_color = (config.fg_color ~= '' and config.fg_color) or fn.synIDattr(fn.hlID("IncSearch"), "fg#")
   local bg_color = (config.bg_color ~= '' and config.bg_color) or fn.synIDattr(fn.hlID("IncSearch"), "bg#")
 
@@ -106,8 +105,11 @@ function NeoColumn.apply_NeoColumn()
 
   cmd("silent! highlight ColorColumn guifg=" .. fg_color .. " guibg=" .. bg_color)
 
-  -- Get the match ID from the buffer variable
-  if match_id then fn.matchdelete(match_id) end
+  -- Get the match ID from the buffer variable, if it exists
+  local match_id_exists, match_id = pcall(vim.api.nvim_buf_get_var, 0, "NeoColumn_match_id")
+  if match_id_exists then
+    vim.fn.matchdelete(match_id)
+  end
 
   if not vim.tbl_contains(config.excluded_ft, ft) then
     if (config.always_on and not neocolumn_bufs[file_path]) or (not config.always_on and neocolumn_bufs[file_path]) then
