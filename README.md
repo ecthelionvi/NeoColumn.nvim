@@ -81,15 +81,15 @@ You can pass your config table into the `setup()` function or `opts` if you use 
 
 The available options:
 
-- `fg_color`(string) : the foreground color of the ColorColumn as a hex code (e.g., `"#FF0000"`)  
+- `fg_color`(string) : foreground color of the ColorColumn as a hex code (e.g., `"#FF0000"`)  
   - `""` (default, falls back to the foreground color of the `IncSearch` highlight group)
-- `bg_color`(string) : the background color of the ColorColumn as a hex code (e.g., `"#00FF00"`)
+- `bg_color`(string) : background color of the ColorColumn as a hex code (e.g., `"#00FF00"`)
   - `""` (default, falls back to the background color of the `IncSearch` highlight group)
-- `NeoColumn` (string) : the character position at which the ColorColumn appears
+- `NeoColumn` (string) : character position at which the ColorColumn appears
   - `"80"` (default)
-- `excluded_ft` (table) : the list of filetypes to exclude from the ColorColumn  
+- `excluded_ft` (table) : table of filetypes to exclude from the ColorColumn  
   - `{}` (default)
-- `always_on` (boolean) : whether to always turn on the ColorColumn by default  
+- `always_on` (boolean) : switch on the ColorColumn by default  
   - `false` (default)
 
 ## 🚨 Always On
