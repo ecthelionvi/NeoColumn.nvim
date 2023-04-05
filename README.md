@@ -25,7 +25,7 @@ NeoColumn is a Neovim plugin that shows a focused ColorColumn at a specific posi
 
 ## ✨ Features
 
-- Displays a focused ColorColumn at the desired position
+- Display a focused ColorColumn at the desired position
 - Exclude specified filetypes from the ColorColumn 
 - Customizable ColorColumn colors 
 - Toggle NeoColumn on and off
@@ -33,6 +33,7 @@ NeoColumn is a Neovim plugin that shows a focused ColorColumn at a specific posi
 ## 💾 Persistence
 
 NeoColumn maintains the ColorColumn settings for each file, including visibility and position, across sessions.
+
 
 ## 🛠️ Usage
 
@@ -92,7 +93,9 @@ The available options:
 - `always_on` (boolean) : whether to always turn on the ColorColumn by default  
   - `false` (default)
 
-When `always_on` is `true`, the ColorColumn is enabled by default in all buffers, but can still be toggled off/on with the `ToggleNeoColumn` command or keybinding.
+## 🚨 Always On
+
+When `always_on` is `true`, the ColorColumn is enabled by default in all buffers.
 
 ### Default Config
 
