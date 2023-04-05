@@ -25,8 +25,10 @@ NeoColumn is a Neovim plugin that shows a focused ColorColumn at a specific posi
 
 ## ✨ Features
 
-- Displays a focused ColorColumn at the desired position
+- Display a focused ColorColumn at the desired position
+- Exclude specified filetypes from the ColorColumn 
 - Toggle NeoColumn on and off
+- Customizable colors 
 
 ## 💾 Persistence
 
@@ -34,7 +36,7 @@ NeoColumn maintains the ColorColumn settings for each file, including visibility
 
 ## 🛠️ Usage
 
-To toggle NeoColumn on and off, you can use the `ToggleNeoColumn` command:
+To toggle NeoColumn on/off, you can use the `ToggleNeoColumn` command:
 
 ```vim
 :ToggleNeoColumn
@@ -45,7 +47,7 @@ You can also create a keybinding to toggle NeoColumn more conveniently:
 vim.keymap.set("n", "<leader>h", "<cmd>ToggleNeoColumn<cr>", { noremap = true, silent = true })
 ```
 
-To clear the list of enabled files in NeoColumn, you can use the `ClearNeoColumn` command:
+To clear the list of enabled/disabled files in NeoColumn, you can use the `ClearNeoColumn` command:
 
 ```vim
 :ClearNeoColumn
@@ -79,19 +81,25 @@ You can pass your config table into the `setup()` function or `opts` if you use 
 
 The available options:
 
-- `NeoColumn` (string) : the character position at which the ColorColumn appears
-  - `"80"` (default)
-- `fg_color`(string) : the foreground color of the ColorColumn as a hex code (e.g., `"#FF0000"`)  
+- `fg_color`(string) : foreground color of the ColorColumn as a hex code (e.g., `"#FF0000"`)  
   - `""` (default, falls back to the foreground color of the `IncSearch` highlight group)
-- `bg_color`(string) : the background color of the ColorColumn as a hex code (e.g., `"#00FF00"`)
+- `bg_color`(string) : background color of the ColorColumn as a hex code (e.g., `"#00FF00"`)
   - `""` (default, falls back to the background color of the `IncSearch` highlight group)
+- `NeoColumn` (string) : character position at which the ColorColumn appears
+  - `"80"` (default)
+- `excluded_ft` (table) : table of filetypes to exclude from the ColorColumn  
+  - `{}` (default)
+- `always_on` (boolean) : switch on/off the ColorColumn by default  
+  - `false` (default)
 
 ### Default Config
 
 ```Lua
 local config = {
-  fg_color = "",
-  bg_color = "",
-  NeoColumn = "80",
+  fg_color = '',
+  bg_color = '',
+  NeoColumn = '80',
+  excluded_ft = {},
+  always_on = false,
 }
 ```
