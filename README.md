@@ -27,13 +27,12 @@ NeoColumn is a Neovim plugin that shows a focused ColorColumn at a specific posi
 
 - Display a focused ColorColumn at the desired position
 - Exclude specified filetypes from the ColorColumn 
-- Customizable ColorColumn colors 
 - Toggle NeoColumn on and off
+- Customizable colors 
 
 ## 💾 Persistence
 
 NeoColumn maintains the ColorColumn settings for each file, including visibility and position, across sessions.
-
 
 ## 🛠️ Usage
 
@@ -48,7 +47,7 @@ You can also create a keybinding to toggle NeoColumn more conveniently:
 vim.keymap.set("n", "<leader>h", "<cmd>ToggleNeoColumn<cr>", { noremap = true, silent = true })
 ```
 
-To clear the list of enabled files in NeoColumn, you can use the `ClearNeoColumn` command:
+To clear the list of enabled/disabled files in NeoColumn, you can use the `ClearNeoColumn` command:
 
 ```vim
 :ClearNeoColumn
@@ -88,7 +87,7 @@ The available options:
   - `""` (default, falls back to the background color of the `IncSearch` highlight group)
 - `NeoColumn` (string) : the character position at which the ColorColumn appears
   - `"80"` (default)
-- `excluded_ft` (table) :  a list of filetypes to exclude from the ColorColumn  
+- `excluded_ft` (table) : the list of filetypes to exclude from the ColorColumn  
   - `{}` (default)
 - `always_on` (boolean) : whether to always turn on the ColorColumn by default  
   - `false` (default)
