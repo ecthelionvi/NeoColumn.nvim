@@ -36,7 +36,7 @@ NeoColumn maintains the ColorColumn settings for each file, including visibility
 
 ## 🛠️ Usage
 
-To toggle NeoColumn on and off, you can use the `ToggleNeoColumn` command:
+To toggle NeoColumn on/off, you can use the `ToggleNeoColumn` command:
 
 ```vim
 :ToggleNeoColumn
