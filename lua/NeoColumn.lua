@@ -72,12 +72,12 @@ end
 
 -- Toggle-NeoColumn
 function NeoColumn.toggle_NeoColumn()
-  local ft = vim.bo.filetype
-  local bt = vim.bo.buftype
+  local buftype = vim.bo.buftype
+  local filetype = vim.bo.filetype
   local file_path = fn.expand('%:p')
   local excluded_ft = config.excluded_ft
   local disabled = { "terminal", "nofile" }
-  if vim.tbl_contains(excluded_ft, ft) or vim.tbl_contains(disabled, bt) then return end
+  if vim.tbl_contains(excluded_ft, filetype) or vim.tbl_contains(disabled, buftype) then return end
   neocolumn_bufs[file_path] = not neocolumn_bufs[file_path]
   NeoColumn.save_neocolumn_bufs()
   NeoColumn.notify_NeoColumn()
@@ -97,8 +97,8 @@ end
 
 -- Apply-NeoColumn
 function NeoColumn.apply_NeoColumn()
-  local bt = vim.bo.buftype
-  local ft = vim.bo.filetype
+  local buftype = vim.bo.buftype
+  local filetype = vim.bo.filetype
   local file_path = fn.expand('%:p')
   local always_on = config.always_on
   local excluded_ft = config.excluded_ft
@@ -109,9 +109,9 @@ function NeoColumn.apply_NeoColumn()
 
   cmd("silent! highlight ColorColumn guifg=" .. fg_color .. " guibg=" .. bg_color .. " | call clearmatches()")
 
-  if vim.tbl_contains(disabled, bt) then return end
+  if vim.tbl_contains(disabled, buftype) then return end
 
-  if not vim.tbl_contains(excluded_ft, ft) then
+  if not vim.tbl_contains(excluded_ft, filetype) then
     if (always_on and not neocolumn_bufs[file_path]) or (not always_on and neocolumn_bufs[file_path]) then
       fn.matchadd("ColorColumn", "\\%" .. NeoColumn_value .. "v.", 100)
     end
