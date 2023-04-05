@@ -92,10 +92,6 @@ The available options:
 - `always_on` (boolean) : switch on/off the ColorColumn by default  
   - `false` (default)
 
-## 🚨 Always On
-
-When `always_on` is `true`, the ColorColumn is enabled by default in all buffers.
-
 ### Default Config
 
 ```Lua
