@@ -89,7 +89,7 @@ The available options:
   - `"80"` (default)
 - `excluded_ft` (table) : table of filetypes to exclude from the ColorColumn  
   - `{}` (default)
-- `always_on` (boolean) : switch on the ColorColumn by default  
+- `always_on` (boolean) : switch on/off the ColorColumn by default  
   - `false` (default)
 
 ## 🚨 Always On
