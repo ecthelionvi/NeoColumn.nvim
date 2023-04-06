@@ -67,9 +67,7 @@ NeoColumn.setup = function(user_settings)
   autocmd({ "Filetype", "BufEnter", "BufWinEnter" }, {
     group = augroup("apply-NeoColumn", { clear = true }),
     callback = function()
-      vim.schedule(function()
-        NeoColumn.apply_NeoColumn()
-      end)
+      pcall(function() NeoColumn.apply_NeoColumn() end)
     end
   })
 end
