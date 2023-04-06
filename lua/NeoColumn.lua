@@ -108,7 +108,13 @@ function NeoColumn.apply_NeoColumn()
   if not vim.tbl_contains(excluded_ft, filetype) then
     if (always_on and not neocolumn_bufs[file_path]) or (not always_on and neocolumn_bufs[file_path]) then
       cmd("silent! highlight ColorColumn guifg=" .. fg_color .. " guibg=" .. bg_color)
-      fn.matchadd("ColorColumn", "\\%" .. NeoColumn_value .. "v.", 100)
+      if config.custom_NeoColumn[filetype] then
+        for _, v in ipairs(config.custom_NeoColumn[filetype]) do
+          fn.matchadd("ColorColumn", "\\%" .. v .. "v.", 100)
+        end
+      else
+        fn.matchadd("ColorColumn", "\\%" .. NeoColumn_value .. "v.", 100)
+      end
     end
   end
 end
