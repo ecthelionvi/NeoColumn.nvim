@@ -95,7 +95,7 @@ The available options:
   - `{}` (default)
   - `{ ruby = "120", java = { "180", "200"} }`
 - `excluded_ft` (table) : filetypes to exclude from the ColorColumn  
-  - `{}` (default)
+  - `{ "text", "markdown" }` (default)
 
 ### Default Config
 
