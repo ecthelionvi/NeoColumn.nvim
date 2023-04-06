@@ -85,12 +85,15 @@ The available options:
   - `""` (default, falls back to the foreground color of the `IncSearch` highlight group)
 - `bg_color`(string) : background color of the ColorColumn as a hex code (e.g., `"#00FF00"`)
   - `""` (default, falls back to the background color of the `IncSearch` highlight group)
-- `NeoColumn` (string) : character position at which the ColorColumn appears
+- `NeoColumn` (string|table) : character position at which the ColorColumn/s appears
   - `"80"` (default)
-- `excluded_ft` (table) : table of filetypes to exclude from the ColorColumn  
-  - `{}` (default)
+  - `{ "80", "100" }` 
 - `always_on` (boolean) : switch on/off the ColorColumn by default  
   - `false` (default)
+- `custom_NeoColumn` (table) : custom ColorColumn values for specific filetypes   
+  - `false` (default)
+- `excluded_ft` (table) : filetypes to exclude from the ColorColumn  
+  - `{}` (default)
 
 ### Default Config
 
@@ -99,7 +102,8 @@ local config = {
   fg_color = '',
   bg_color = '',
   NeoColumn = '80',
-  excluded_ft = {},
   always_on = false,
+  custom_NeoColumn = {},
+  excluded_ft = { "text", "markdown" },
 }
 ```
