@@ -27,7 +27,12 @@ local config = {
   always_on = false,
 }
 
-local BUFS_FILE = fn.stdpath('cache') .. "/neocolumn_bufs.json"
+local NEOCOLUMN_DIR = fn.stdpath('cache') .. "/NeoColumn"
+local BUFS_FILE = NEOCOLUMN_DIR .. "/neocolumn_bufs.json"
+
+-- Create-NeoColumn-Dir
+fn.mkdir(NEOCOLUMN_DIR, "p")
+
 
 local function load_NeoColumn()
   if fn.filereadable(BUFS_FILE) == 1 then
