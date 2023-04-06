@@ -25,6 +25,7 @@ local config = {
   NeoColumn = '80',
   excluded_ft = {},
   always_on = false,
+  custom_NeoColumn = {},
 }
 
 local NEOCOLUMN_DIR = fn.stdpath('cache') .. "/NeoColumn"
@@ -99,6 +100,10 @@ function NeoColumn.apply_NeoColumn()
   fn.clearmatches()
 
   if not NeoColumn.valid_buffer() then return end
+
+  if config.custom_NeoColumn[filetype] then
+    NeoColumn_value = config.custom_NeoColumn[filetype]
+  end
 
   if not vim.tbl_contains(excluded_ft, filetype) then
     if (always_on and not neocolumn_bufs[file_path]) or (not always_on and neocolumn_bufs[file_path]) then
