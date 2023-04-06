@@ -93,7 +93,7 @@ function NeoColumn.apply_NeoColumn()
   local file_path = fn.expand('%:p')
   local always_on = config.always_on
   local excluded_ft = config.excluded_ft
-  local NeoColumn_value = config.NeoColumn
+  local NeoColumn_value = type(config.NeoColumn) == "string" and { config.NeoColumn } or config.NeoColumn
   local fg_color = (config.fg_color ~= '' and config.fg_color) or fn.synIDattr(fn.hlID("IncSearch"), "fg#")
   local bg_color = (config.bg_color ~= '' and config.bg_color) or fn.synIDattr(fn.hlID("IncSearch"), "bg#")
 
@@ -109,7 +109,9 @@ function NeoColumn.apply_NeoColumn()
           fn.matchadd("ColorColumn", "\\%" .. v .. "v.", 100)
         end
       else
-        fn.matchadd("ColorColumn", "\\%" .. NeoColumn_value .. "v.", 100)
+        for _, v in ipairs(NeoColumn_value) do
+          fn.matchadd("ColorColumn", "\\%" .. v .. "v.", 100)
+        end
       end
     end
   end
