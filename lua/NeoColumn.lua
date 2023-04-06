@@ -121,7 +121,7 @@ end
 -- Valid-Buffer
 function NeoColumn.valid_buffer()
   local buftype = vim.bo.buftype
-  local disabled = { "terminal", "nofile" }
+  local disabled = { "help", "nofile", "terminal" }
   if not vim.tbl_contains(disabled, buftype) then return true end
 end
 
