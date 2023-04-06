@@ -92,7 +92,8 @@ The available options:
 - `always_on` (boolean) : switch on/off the ColorColumn by default  
   - `false` (default)
 - `custom_NeoColumn` (table) : custom ColorColumn values for specific filetypes   
-  - `false` (default)
+  - `{}` (default)
+  - `{ ruby = "120", java = { "180", "200"} }`
 - `excluded_ft` (table) : filetypes to exclude from the ColorColumn  
   - `{}` (default)
 
