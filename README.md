@@ -85,7 +85,7 @@ The available options:
   - `""` (default, falls back to the foreground color of the `IncSearch` highlight group)
 - `bg_color`(string) : background color of the ColorColumn as a hex code (e.g., `"#00FF00"`)
   - `""` (default, falls back to the background color of the `IncSearch` highlight group)
-- `NeoColumn` (string|table) : character position at which the ColorColumn/s appears
+- `NeoColumn` (string / table) : character position at which the ColorColumn/s appears
   - `"80"` (default)
   - `{ "80", "100" }` 
 - `always_on` (boolean) : switch on/off the ColorColumn by default  
