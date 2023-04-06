@@ -101,10 +101,6 @@ function NeoColumn.apply_NeoColumn()
 
   if not NeoColumn.valid_buffer() then return end
 
-  if config.custom_NeoColumn[filetype] then
-    NeoColumn_value = config.custom_NeoColumn[filetype]
-  end
-
   if not vim.tbl_contains(excluded_ft, filetype) then
     if (always_on and not neocolumn_bufs[file_path]) or (not always_on and neocolumn_bufs[file_path]) then
       cmd("silent! highlight ColorColumn guifg=" .. fg_color .. " guibg=" .. bg_color)
