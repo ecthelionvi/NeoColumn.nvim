@@ -148,13 +148,12 @@ end
 
 -- Clear-NeoView
 function NeoColumn.clear_NeoColumn()
-  fn.clearmatches()
-
   -- Delete neocolumn bufs file
   if fn.filereadable(BUFS_FILE) == 1 then
     fn.delete(BUFS_FILE)
   end
 
+  fn.clearmatches()
   NeoColumn.notify_NeoColumn(true)
 end
 
