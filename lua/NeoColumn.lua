@@ -30,9 +30,8 @@ local config = {
 local NEOCOLUMN_DIR = fn.stdpath('cache') .. "/NeoColumn"
 local BUFS_FILE = NEOCOLUMN_DIR .. "/neocolumn_bufs.json"
 
--- Create-NeoColumn-Dir
+-- Create NeoColumn directory if it doesn't exist
 fn.mkdir(NEOCOLUMN_DIR, "p")
-
 
 local function load_NeoColumn()
   if fn.filereadable(BUFS_FILE) == 1 then
@@ -130,7 +129,7 @@ function NeoColumn.valid_buffer()
   if not vim.tbl_contains(disabled, buftype) then return true end
 end
 
--- Save-neocolumn_bufs
+-- Save-NecColumn
 function NeoColumn.save_NeoColumn()
   local cache_dir = fn.stdpath('cache')
   if fn.isdirectory(cache_dir) == 0 then
@@ -149,9 +148,13 @@ end
 
 -- Clear-NeoView
 function NeoColumn.clear_NeoColumn()
-  neocolumn_bufs = {}
   fn.clearmatches()
-  NeoColumn.save_NeoColumn()
+
+  -- Delete neocolumn bufs file
+  if fn.filereadable(BUFS_FILE) == 1 then
+    fn.delete(BUFS_FILE)
+  end
+
   NeoColumn.notify_NeoColumn(true)
 end
 
