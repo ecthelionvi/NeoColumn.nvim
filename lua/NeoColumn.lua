@@ -131,11 +131,6 @@ end
 
 -- Save-NecColumn
 function NeoColumn.save_NeoColumn()
-  local cache_dir = fn.stdpath('cache')
-  if fn.isdirectory(cache_dir) == 0 then
-    fn.mkdir(cache_dir, 'p')
-  end
-
   local items = {}
   for k, v in pairs(neocolumn_bufs) do
     if v then
