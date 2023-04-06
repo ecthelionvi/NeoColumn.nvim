@@ -81,10 +81,9 @@ function NeoColumn.notify_NeoColumn(clear)
     vim.notify("NeoColumn " .. ((always_on ~= neocolumn_bufs[fn.expand('%:p')]) and "Enabled" or "Disabled"))
   end
   -- Clear the message area after 3 seconds (3000 milliseconds)
-  vim.schedule(function()
-    vim.cmd("sleep 3000m")
-    vim.cmd("echo ''")
-  end)
+  vim.defer_fn(function()
+    api.nvim_echo({ { '' } }, false, {})
+  end, 3000)
 end
 
 -- Apply-NeoColumn
@@ -97,7 +96,7 @@ function NeoColumn.apply_NeoColumn()
   local fg_color = (config.fg_color ~= '' and config.fg_color) or fn.synIDattr(fn.hlID("IncSearch"), "fg#")
   local bg_color = (config.bg_color ~= '' and config.bg_color) or fn.synIDattr(fn.hlID("IncSearch"), "bg#")
 
-  cmd("silent! call clearmatches()")
+  fn.clearmatches()
 
   if not NeoColumn.valid_buffer() then return end
 
