@@ -23,9 +23,9 @@ local config = {
   fg_color = '',
   bg_color = '',
   NeoColumn = '80',
-  excluded_ft = {},
   always_on = false,
   custom_NeoColumn = {},
+  excluded_ft = { "text", "markdown" },
 }
 
 local NEOCOLUMN_DIR = fn.stdpath('cache') .. "/NeoColumn"
