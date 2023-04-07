@@ -53,6 +53,7 @@ end
 local neocolumn_bufs = load_NeoColumn()
 
 NeoColumn.setup = function(user_settings)
+  user_settings = user_settings or {}
   -- Merge user settings with default settings
   for k, v in pairs(user_settings) do
     config[k] = v
