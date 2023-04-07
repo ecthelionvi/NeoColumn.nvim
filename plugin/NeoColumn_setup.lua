@@ -1,1 +1,1 @@
-require('NeoColumn').setup()
+require('NeoColumn').setup(user_settings)
