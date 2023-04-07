@@ -71,7 +71,7 @@ To clear the list of enabled/disabled files in NeoColumn, you can use the `Clear
 use "ecthelionvi/NeoColumn.nvim"
 ```
 
-2. Optionally, call setup() in your init.lua to customize the plugin. Skip this step if you're fine with the default settings or using lazy.nvim with opts set as above.
+2. Setup the plugin in your `init.lua`. Skip this step if you're fine with the default settings or using lazy.nvim with opts set as above.
 ```Lua
 require("NeoColumn").setup()
 ```
