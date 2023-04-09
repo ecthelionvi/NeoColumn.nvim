@@ -22,7 +22,6 @@ local user_cmd = vim.api.nvim_create_user_command
 local config = {
   fg_color = '',
   bg_color = '',
-  enabled = true,
   NeoColumn = '80',
   always_on = false,
   custom_NeoColumn = {},
@@ -59,8 +58,6 @@ NeoColumn.setup = function(user_settings)
   for k, v in pairs(user_settings) do
     config[k] = v
   end
-
-  if not config.enabled then return end
 
   -- Toggle-NeoColumn
   user_cmd("ToggleNeoColumn", "lua require('NeoColumn').toggle_NeoColumn()", {})
