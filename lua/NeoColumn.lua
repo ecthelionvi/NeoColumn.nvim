@@ -30,8 +30,6 @@ local config = {
 
 local NEOCOLUMN_DIR = fn.stdpath('cache') .. "/NeoColumn"
 local BUFS_FILE = NEOCOLUMN_DIR .. "/neocolumn_bufs.json"
-
--- Create NeoColumn directory if it doesn't exist
 fn.mkdir(NEOCOLUMN_DIR, "p")
 
 local function load_NeoColumn()
@@ -59,38 +57,58 @@ NeoColumn.setup = function(user_settings)
 
   vim.g.neocolumn_setup = true
   user_settings = user_settings or {}
-  -- Merge user settings with default settings
   for k, v in pairs(user_settings) do
     config[k] = v
   end
 
-  -- Toggle-NeoColumn
-  user_cmd("ToggleNeoColumn", "lua require('NeoColumn').toggle_NeoColumn()", {})
-
-  -- Clear-NeoColumnList
-  user_cmd("ClearNeoColumn", "lua require('NeoColumn').clear_NeoColumn()", {})
-
-  -- Apply-NeoColumn
   autocmd({ "Filetype", "BufEnter", "BufWinEnter" }, {
     group = augroup("apply-NeoColumn", { clear = true }),
     callback = function()
       pcall(function() NeoColumn.apply_NeoColumn() end)
     end
   })
+
+  user_cmd("ClearNeoColumn", "lua require('NeoColumn').clear_NeoColumn()", {})
+
+  user_cmd("ToggleNeoColumn", "lua require('NeoColumn').toggle_NeoColumn()", {})
 end
 
--- Notify-NeoColumn
-function NeoColumn.notify_NeoColumn(clear)
-  local always_on = config.always_on
-  if clear then
-    vim.notify("NeoColumn Data Cleared")
-  else
-    vim.notify("NeoColumn " .. ((always_on ~= neocolumn_bufs[fn.expand('%:p')]) and "Enabled" or "Disabled"))
+function NeoColumn.clear_NeoColumn()
+  fn.clearmatches()
+  neocolumn_bufs = {}
+  if fn.filereadable(BUFS_FILE) == 1 then
+    fn.delete(BUFS_FILE)
   end
-  -- Clear the message area after 3 seconds (3000 milliseconds)
-  vim.defer_fn(function()
-    api.nvim_echo({ { '' } }, false, {})
-  end, 3000)
+
+  NeoColumn.notify_NeoColumn(true)
+end
+
+function NeoColumn.save_NeoColumn()
+  local items = {}
+  for k, v in pairs(neocolumn_bufs) do
+    if v then
+      table.insert(items, k)
+    end
+  end
+  local json_data = fn.json_encode(items)
+  fn.writefile({ json_data }, BUFS_FILE)
+end
+
+function NeoColumn.valid_buffer()
+  local buftype = vim.bo.buftype
+  local disabled = { "help", "prompt", "nofile", "terminal" }
+  if not vim.tbl_contains(disabled, buftype) then return true end
+end
+
+function NeoColumn.toggle_NeoColumn()
+  local filetype = vim.bo.filetype
+  local file_path = fn.expand('%:p')
+  local excluded_ft = config.excluded_ft
+  if vim.tbl_contains(excluded_ft, filetype) or not NeoColumn.valid_buffer() then return end
+  neocolumn_bufs[file_path] = not neocolumn_bufs[file_path]
+  NeoColumn.save_NeoColumn()
+  NeoColumn.notify_NeoColumn()
+  NeoColumn.apply_NeoColumn()
 end
 
 -- Apply-NeoColumn
@@ -123,47 +141,23 @@ function NeoColumn.apply_NeoColumn()
   end
 end
 
--- Toggle-NeoColumn
-function NeoColumn.toggle_NeoColumn()
-  local filetype = vim.bo.filetype
-  local file_path = fn.expand('%:p')
-  local excluded_ft = config.excluded_ft
-  if vim.tbl_contains(excluded_ft, filetype) or not NeoColumn.valid_buffer() then return end
-  neocolumn_bufs[file_path] = not neocolumn_bufs[file_path]
-  NeoColumn.save_NeoColumn()
-  NeoColumn.notify_NeoColumn()
-  NeoColumn.apply_NeoColumn()
-end
-
--- Valid-Buffer
-function NeoColumn.valid_buffer()
-  local buftype = vim.bo.buftype
-  local disabled = { "help", "prompt", "nofile", "terminal" }
-  if not vim.tbl_contains(disabled, buftype) then return true end
-end
-
--- Save-NecColumn
-function NeoColumn.save_NeoColumn()
-  local items = {}
-  for k, v in pairs(neocolumn_bufs) do
-    if v then
-      table.insert(items, k)
-    end
-  end
-  local json_data = fn.json_encode(items)
-  fn.writefile({ json_data }, BUFS_FILE)
-end
-
--- Clear-NeoView
-function NeoColumn.clear_NeoColumn()
-  fn.clearmatches()
-  neocolumn_bufs = {}
-  -- Delete neocolumn bufs file
-  if fn.filereadable(BUFS_FILE) == 1 then
-    fn.delete(BUFS_FILE)
+function NeoColumn.notify_NeoColumn(clear)
+  local timer = vim.loop.new_timer()
+  local always_on = config.always_on
+  if clear then
+    vim.notify("NeoColumn Data Cleared")
+  else
+    vim.notify("NeoColumn " .. ((always_on ~= neocolumn_bufs[fn.expand('%:p')]) and "Enabled" or "Disabled"))
   end
 
-  NeoColumn.notify_NeoColumn(true)
+  if timer then
+    timer:start(3000, 0, function()
+      api.nvim_echo({ { '' } }, false, {})
+
+      timer:stop()
+      timer:close()
+    end)
+  end
 end
 
 return NeoColumn
