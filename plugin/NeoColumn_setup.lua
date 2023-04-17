@@ -1,7 +1,3 @@
-if vim.g.loaded_neocolumn then
-  return
+if not vim.g.neocolumn_setup then
+  require('NeoColumn').setup()
 end
-
-require('NeoColumn').setup()
-
-vim.g.loaded_neocolumn = true
