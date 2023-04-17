@@ -142,7 +142,6 @@ function NeoColumn.apply_NeoColumn()
 end
 
 function NeoColumn.notify_NeoColumn(clear)
-  local timer = vim.loop.new_timer()
   local always_on = config.always_on
   if clear then
     vim.notify("NeoColumn Data Cleared")
@@ -150,13 +149,15 @@ function NeoColumn.notify_NeoColumn(clear)
     vim.notify("NeoColumn " .. ((always_on ~= neocolumn_bufs[fn.expand('%:p')]) and "Enabled" or "Disabled"))
   end
 
+  local timer = vim.loop.new_timer()
+
   if timer then
-    timer:start(3000, 0, function()
-      api.nvim_echo({ { '' } }, false, {})
+    timer:start(3000, 0, vim.schedule_wrap(function()
+      vim.cmd("echo ''")
 
       timer:stop()
       timer:close()
-    end)
+    end))
   end
 end
 
