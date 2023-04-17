@@ -14,21 +14,20 @@ local NeoColumn = {}
 
 local fn = vim.fn
 local cmd = vim.cmd
-local api = vim.api
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 local user_cmd = vim.api.nvim_create_user_command
 
 local config = {
-  fg_color = '',
-  bg_color = '',
-  NeoColumn = '80',
+  fg_color = "",
+  bg_color = "",
+  NeoColumn = "80",
   always_on = false,
   custom_NeoColumn = {},
   excluded_ft = { "text", "markdown" },
 }
 
-local NEOCOLUMN_DIR = fn.stdpath('cache') .. "/NeoColumn"
+local NEOCOLUMN_DIR = fn.stdpath("cache") .. "/NeoColumn"
 local BUFS_FILE = NEOCOLUMN_DIR .. "/neocolumn_bufs.json"
 fn.mkdir(NEOCOLUMN_DIR, "p")
 
@@ -114,12 +113,12 @@ end
 -- Apply-NeoColumn
 function NeoColumn.apply_NeoColumn()
   local filetype = vim.bo.filetype
-  local file_path = fn.expand('%:p')
+  local file_path = fn.expand("%:p")
   local always_on = config.always_on
   local excluded_ft = config.excluded_ft
   local NeoColumn_value = type(config.NeoColumn) == "string" and { config.NeoColumn } or config.NeoColumn
-  local fg_color = (config.fg_color ~= '' and config.fg_color) or fn.synIDattr(fn.hlID("IncSearch"), "fg#")
-  local bg_color = (config.bg_color ~= '' and config.bg_color) or fn.synIDattr(fn.hlID("IncSearch"), "bg#")
+  local fg_color = (config.fg_color ~= "" and config.fg_color) or fn.synIDattr(fn.hlID("IncSearch"), "fg#")
+  local bg_color = (config.bg_color ~= "" and config.bg_color) or fn.synIDattr(fn.hlID("IncSearch"), "bg#")
 
   fn.clearmatches()
 
