@@ -25,8 +25,9 @@ NeoColumn is a Neovim plugin that shows a focused ColorColumn at a specific posi
 
 ## ✨ Features
 
-- Display a focused ColorColumn at the desired position
-- Exclude specified filetypes from the ColorColumn 
+- Display focused ColorColumn/s at the desired position
+- Set custom ColorColumn value/s for certain filetypes 
+- Exclude specific filetypes from the ColorColumn
 - Toggle NeoColumn on and off
 - Customizable colors 
 
@@ -70,7 +71,7 @@ To clear the list of enabled/disabled files in NeoColumn, you can use the `Clear
 use "ecthelionvi/NeoColumn.nvim"
 ```
 
-2. Setup the plugin in your `init.lua`. This step is not needed with lazy.nvim if `opts` is set as above.
+2. Setup the plugin in your `init.lua`. Skip this step if you're fine with the default settings or using lazy.nvim with opts set as above.
 ```Lua
 require("NeoColumn").setup()
 ```
@@ -85,21 +86,26 @@ The available options:
   - `""` (default, falls back to the foreground color of the `IncSearch` highlight group)
 - `bg_color`(string) : background color of the ColorColumn as a hex code (e.g., `"#00FF00"`)
   - `""` (default, falls back to the background color of the `IncSearch` highlight group)
-- `NeoColumn` (string) : character position at which the ColorColumn appears
+- `NeoColumn` (string / table) : character position at which the ColorColumn/s appears
   - `"80"` (default)
-- `excluded_ft` (table) : table of filetypes to exclude from the ColorColumn  
-  - `{}` (default)
+  - `{ "80", "100" }` 
 - `always_on` (boolean) : switch on/off the ColorColumn by default  
   - `false` (default)
+- `custom_NeoColumn` (table) : custom ColorColumn values for specific filetypes   
+  - `{}` (default)
+  - `{ ruby = "120", java = { "180", "200"} }`
+- `excluded_ft` (table) : filetypes to exclude from the ColorColumn  
+  - `{ "text", "markdown" }` (default)
 
 ### Default Config
 
 ```Lua
 local config = {
-  fg_color = '',
-  bg_color = '',
-  NeoColumn = '80',
-  excluded_ft = {},
+  fg_color = "",
+  bg_color = "",
+  NeoColumn = "80",
   always_on = false,
+  custom_NeoColumn = {},
+  excluded_ft = { "text", "markdown" },
 }
 ```
