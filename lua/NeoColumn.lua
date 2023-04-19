@@ -1,5 +1,4 @@
 --[[
-
  /$$   /$$                      /$$$$$$            /$$
 | $$$ | $$                     /$$__  $$          | $$
 | $$$$| $$  /$$$$$$   /$$$$$$ | $$  \__/  /$$$$$$ | $$ /$$   /$$ /$$$$$$/$$$$  /$$$$$$$
@@ -8,7 +7,6 @@
 | $$\  $$$| $$_____/| $$  | $$| $$    $$| $$  | $$| $$| $$  | $$| $$ | $$ | $$| $$  | $$
 | $$ \  $$|  $$$$$$$|  $$$$$$/|  $$$$$$/|  $$$$$$/| $$|  $$$$$$/| $$ | $$ | $$| $$  | $$
 |__/  \__/ \_______/ \______/  \______/  \______/ |__/ \______/ |__/ |__/ |__/|__/  |__/
-
 --]]
 local NeoColumn = {}
 
@@ -110,6 +108,7 @@ function NeoColumn.toggle_neocolumn()
   NeoColumn.apply_neocolumn()
 end
 
+-- Apply-NeoColumn
 function NeoColumn.apply_neocolumn()
   local filetype = vim.bo.filetype
   local file_path = fn.expand("%:p")
@@ -140,13 +139,14 @@ function NeoColumn.apply_neocolumn()
 end
 
 function NeoColumn.notify_neocolumn(clear)
-  local timer = vim.loop.new_timer()
   local always_on = config.always_on
   if clear then
     vim.notify("NeoColumn Data Cleared")
   else
     vim.notify("NeoColumn " .. ((always_on ~= neocolumn_bufs[fn.expand('%:p')]) and "Enabled" or "Disabled"))
   end
+
+  local timer = vim.loop.new_timer()
 
   if timer then
     timer:start(3000, 0, vim.schedule_wrap(function()
