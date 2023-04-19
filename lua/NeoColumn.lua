@@ -31,7 +31,7 @@ local NEOCOLUMN_DIR = fn.stdpath("cache") .. "/NeoColumn"
 local BUFS_FILE = NEOCOLUMN_DIR .. "/neocolumn_bufs.json"
 fn.mkdir(NEOCOLUMN_DIR, "p")
 
-local function load_NeoColumn()
+local function load_neocolumn()
   if fn.filereadable(BUFS_FILE) == 1 then
     local file_content = table.concat(fn.readfile(BUFS_FILE))
     local decoded_data = fn.json_decode(file_content)
@@ -47,7 +47,7 @@ local function load_NeoColumn()
   end
 end
 
-local neocolumn_bufs = load_NeoColumn()
+local neocolumn_bufs = load_neocolumn()
 
 NeoColumn.setup = function(user_settings)
   if vim.g.neocolumn_setup then
@@ -63,26 +63,26 @@ NeoColumn.setup = function(user_settings)
   autocmd({ "Filetype", "BufEnter", "BufWinEnter" }, {
     group = augroup("apply-NeoColumn", { clear = true }),
     callback = function()
-      pcall(function() NeoColumn.apply_NeoColumn() end)
+      pcall(function() NeoColumn.apply_neocolumn() end)
     end
   })
 
-  user_cmd("ClearNeoColumn", "lua require('NeoColumn').clear_NeoColumn()", {})
+  user_cmd("ClearNeoColumn", "lua require('NeoColumn').clear_neocolumn()", {})
 
-  user_cmd("ToggleNeoColumn", "lua require('NeoColumn').toggle_NeoColumn()", {})
+  user_cmd("ToggleNeoColumn", "lua require('NeoColumn').toggle_neocolumn()", {})
 end
 
-function NeoColumn.clear_NeoColumn()
+function NeoColumn.clear_neocolumn()
   fn.clearmatches()
   neocolumn_bufs = {}
   if fn.filereadable(BUFS_FILE) == 1 then
     fn.delete(BUFS_FILE)
   end
 
-  NeoColumn.notify_NeoColumn(true)
+  NeoColumn.notify_neocolumn(true)
 end
 
-function NeoColumn.save_NeoColumn()
+function NeoColumn.save_neocolumn()
   local items = {}
   for k, v in pairs(neocolumn_bufs) do
     if v then
@@ -99,18 +99,18 @@ function NeoColumn.valid_buffer()
   if not vim.tbl_contains(disabled, buftype) then return true end
 end
 
-function NeoColumn.toggle_NeoColumn()
+function NeoColumn.toggle_neocolumn()
   local filetype = vim.bo.filetype
   local file_path = fn.expand('%:p')
   local excluded_ft = config.excluded_ft
   if vim.tbl_contains(excluded_ft, filetype) or not NeoColumn.valid_buffer() then return end
   neocolumn_bufs[file_path] = not neocolumn_bufs[file_path]
-  NeoColumn.save_NeoColumn()
-  NeoColumn.notify_NeoColumn()
-  NeoColumn.apply_NeoColumn()
+  NeoColumn.save_neocolumn()
+  NeoColumn.notify_neocolumn()
+  NeoColumn.apply_neocolumn()
 end
 
-function NeoColumn.apply_NeoColumn()
+function NeoColumn.apply_neocolumn()
   local filetype = vim.bo.filetype
   local file_path = fn.expand("%:p")
   local always_on = config.always_on
@@ -139,7 +139,8 @@ function NeoColumn.apply_NeoColumn()
   end
 end
 
-function NeoColumn.notify_NeoColumn(clear)
+function NeoColumn.notify_neocolumn(clear)
+  local timer = vim.loop.new_timer()
   local always_on = config.always_on
   if clear then
     vim.notify("NeoColumn Data Cleared")
@@ -147,7 +148,6 @@ function NeoColumn.notify_NeoColumn(clear)
     vim.notify("NeoColumn " .. ((always_on ~= neocolumn_bufs[fn.expand('%:p')]) and "Enabled" or "Disabled"))
   end
 
-  local timer = vim.loop.new_timer()
   if timer then
     timer:start(3000, 0, vim.schedule_wrap(function()
       vim.cmd("echo ''")
