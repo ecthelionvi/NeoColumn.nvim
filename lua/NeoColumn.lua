@@ -110,7 +110,6 @@ function NeoColumn.toggle_NeoColumn()
   NeoColumn.apply_NeoColumn()
 end
 
--- Apply-NeoColumn
 function NeoColumn.apply_NeoColumn()
   local filetype = vim.bo.filetype
   local file_path = fn.expand("%:p")
@@ -149,7 +148,6 @@ function NeoColumn.notify_NeoColumn(clear)
   end
 
   local timer = vim.loop.new_timer()
-
   if timer then
     timer:start(3000, 0, vim.schedule_wrap(function()
       vim.cmd("echo ''")
