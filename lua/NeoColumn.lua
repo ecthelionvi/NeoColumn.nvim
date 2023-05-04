@@ -48,11 +48,6 @@ end
 local neocolumn_bufs = load_neocolumn()
 
 NeoColumn.setup = function(user_settings)
-  if vim.g.neocolumn_setup then
-    return
-  end
-
-  vim.g.neocolumn_setup = true
   user_settings = user_settings or {}
   for k, v in pairs(user_settings) do
     config[k] = v
