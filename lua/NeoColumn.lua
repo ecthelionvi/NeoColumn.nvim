@@ -121,7 +121,8 @@ function NeoColumn.apply_neocolumn()
     if (always_on and not neocolumn_bufs[file_path]) or (not always_on and neocolumn_bufs[file_path]) then
       cmd("silent! highlight ColorColumn guifg=" .. fg_color .. " guibg=" .. bg_color)
       if config.custom_NeoColumn[filetype] then
-        for _, v in ipairs(config.custom_NeoColumn[filetype]) do
+        local custom_value = type(config.custom_NeoColumn[filetype]) == "string" and { config.custom_NeoColumn[filetype] } or config.custom_NeoColumn[filetype]
+        for _, v in ipairs(custom_value) do
           fn.matchadd("ColorColumn", "\\%" .. v .. "v.", 100)
         end
       else
@@ -132,6 +133,7 @@ function NeoColumn.apply_neocolumn()
     end
   end
 end
+
 
 function NeoColumn.notify_neocolumn(clear)
   local always_on = config.always_on
